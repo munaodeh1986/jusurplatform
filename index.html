@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>منصة جسور | أول حاضنة أعمال مدرسية ذكية</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1E3A8A;
+            --primary-blue-dark: #0F2A6B;
+            --primary-green: #10B981;
+            --primary-green-dark: #059669;
+            --primary-orange: #F59E0B;
+            --primary-orange-dark: #D97706;
+            --primary-purple: #8B5CF6;
+            --primary-teal: #06B6D4;
+            --gray-bg: #F3F4F6;
+            --gray-card: #FFFFFF;
+            --gray-border: #E5E7EB;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --text-white: #FFFFFF;
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* English Mode */
+        body.english {
+            direction: ltr;
+            text-align: left;
+        }
+
+        body.english .lang-ar {
+            display: none;
+        }
+
+        body:not(.english) .lang-en {
+            display: none;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--gray-card);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.95);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--primary-green);
+        }
+
+        .lang-toggle {
+            background: var(--gray-bg);
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 500;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .lang-toggle:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-green-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Cards */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 48px;
+            font-size: 18px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .card {
+            background: var(--gray-card);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-border);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 28px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-light);
+        }
+
+        /* Stats */
+        .stats {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Problems Bank */
+        .problems-section {
+            background: var(--gray-bg);
+        }
+
+        .filters {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 1px solid var(--gray-border);
+            padding: 8px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+        }
+
+        .problem-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 24px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .problem-badge {
+            display: inline-block;
+            background: var(--primary-orange);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .problem-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .problem-desc {
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .problem-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-border);
+        }
+
+        .adopt-btn {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 32px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        /* CTA */
+        .cta {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--text-light);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            display: block;
+            color: var(--text-light);
+            text-decoration: none;
+            margin-bottom: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .header-content {
+                flex-direction: column;
+            }
+            .nav {
+                justify-content: center;
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">ج</div>
+                    <div class="logo-text">جسور | Jusur</div>
+                </div>
+                <div class="nav">
+                    <a href="#home" class="lang-ar">الرئيسية</a>
+                    <a href="#home" class="lang-en">Home</a>
+                    <a href="#problems" class="lang-ar">بنك المشكلات</a>
+                    <a href="#problems" class="lang-en">Problems Bank</a>
+                    <a href="#program" class="lang-ar">برنامج الاحتضان</a>
+                    <a href="#program" class="lang-en">Incubation</a>
+                    <a href="#about" class="lang-ar">عن المنصة</a>
+                    <a href="#about" class="lang-en">About</a>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button class="lang-toggle" onclick="toggleLanguage()">
+                        <span class="lang-ar">English</span>
+                        <span class="lang-en">العربية</span>
+                    </button>
+                    <button class="btn-primary" onclick="openModal()">
+                        <span class="lang-ar">انضم الآن</span>
+                        <span class="lang-en">Join Now</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="lang-ar">منصة جسور – من المشكلة إلى المشروع</h1>
+                    <h1 class="lang-en">Jusur Platform – From Problem to Project</h1>
+                    <p class="lang-ar">أول حاضنة أعمال مدرسية ذكية تربط الطلاب بالمشكلات الحقيقية ورواد الأعمال والمتخصصين والمستثمرين</p>
+                    <p class="lang-en">The first smart school business incubator connecting students with real problems, entrepreneurs, specialists, and investors</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick="document.getElementById('problems').scrollIntoView({behavior: 'smooth'})">
+                            <span class="lang-ar">اكتشف بنك المشكلات</span>
+                            <span class="lang-en">Explore Problems Bank</span>
+                        </button>
+                        <button class="btn-outline" onclick="openModal()">
+                            <span class="lang-ar">انضم كمرشد</span>
+                            <span class="lang-en">Join as Mentor</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div>
+                        <div class="stat-number">50,000+</div>
+                        <div class="stat-label lang-ar">طالب مستفيد</div>
+                        <div class="stat-label lang-en">Students Impacted</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">1,000+</div>
+                        <div class="stat-label lang-ar">مرشد وخبير</div>
+                        <div class="stat-label lang-en">Mentors & Experts</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label lang-ar">مشروع ممول</div>
+                        <div class="stat-label lang-en">Funded Projects</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label lang-ar">مدرسة مشاركة</div>
+                        <div class="stat-label lang-en">Participating Schools</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title lang-ar">مميزات منصة جسور</h2>
+                <h2 class="section-title lang-en">Jusur Platform Features</h2>
+                <p class="section-subtitle lang-ar">نقدم لك تجربة متكاملة لتحويل أفكارك إلى مشاريع حقيقية</p>
+                <p class="section-subtitle lang-en">A complete experience to turn your ideas into real projects</p>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-database"></i></div>
+                        <h3 class="lang-ar">بنك المشكلات</h3>
+                        <h3 class="lang-en">Problems Bank</h3>
+                        <p class="lang-ar">آلاف المشكلات الحقيقية التي تحتاج حلولاً مبتكرة</p>
+                        <p class="lang-en">Thousands of real problems waiting for innovative solutions</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-brain"></i></div>
+                        <h3 class="lang-ar">مطابقة ذكية</h3>
+                        <h3 class="lang-en">Smart Matching</h3>
+                        <p class="lang-ar">خوارزميات ذكاء اصطناعي تربطك بالمرشد المناسب</p>
+                        <p class="lang-en">AI algorithms connect you with the right mentor</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-robot"></i></div>
+                        <h3 class="lang-ar">مساعد ذكي 24/7</h3>
+                        <h3 class="lang-en">AI Assistant 24/7</h3>
+                        <p class="lang-ar">مرشد رقمي يساعدك في كل خطوة</p>
+                        <p class="lang-en">Digital mentor guiding you every step</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-gamepad"></i></div>
+                        <h3 class="lang-ar">نظام التلعيب</h3>
+                        <h3 class="lang-en">Gamification</h3>
+                        <p class="lang-ar">نقاط وشارات وجوائز تحفيزية</p>
+                        <p class="lang-en">Points, badges, and exciting rewards</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-store"></i></div>
+                        <h3 class="lang-ar">السوق المصغر</h3>
+                        <h3 class="lang-en">Mini-Market</h3>
+                        <p class="lang-ar">عرض وبيع النماذج الأولية</p>
+                        <p class="lang-en">Showcase and sell your prototypes</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-chalkboard-user"></i></div>
+                        <h3 class="lang-ar">سفراء جسور</h3>
+                        <h3 class="lang-en">Jusur Ambassadors</h3>
+                        <p class="lang-ar">خريجون يوجهون الجيل القادم</p>
+                        <p class="lang-en">Graduates guiding the next generation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problems Bank Section -->
+        <section class="section problems-section" id="problems">
+            <div class="container">
+                <h2 class="section-title lang-ar">بنك المشكلات</h2>
+                <h2 class="section-title lang-en">Problems Bank</h2>
+                <p class="section-subtitle lang-ar">اختر مشكلة حقيقية وكن جزءاً من الحل</p>
+                <p class="section-subtitle lang-en">Choose a real problem and be part of the solution</p>
+                
+                <div class="filters">
+                    <button class="filter-btn active" onclick="filterProblems('all')"><span class="lang-ar">الكل</span><span class="lang-en">All</span></button>
+                    <button class="filter-btn" onclick="filterProblems('tech')"><span class="lang-ar">تقني</span><span class="lang-en">Tech</span></button>
+                    <button class="filter-btn" onclick="filterProblems('edu')"><span class="lang-ar">تعليمي</span><span class="lang-en">Education</span></button>
+                    <button class="filter-btn" onclick="filterProblems('env')"><span class="lang-ar">بيئي</span><span class="lang-en">Environment</span></button>
+                    <button class="filter-btn" onclick="filterProblems('health')"><span class="lang-ar">صحي</span><span class="lang-en">Health</span></button>
+                </div>
+
+                <div class="grid" id="problemsGrid">
+                    <!-- Problems will be loaded via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title lang-ar">كيف تعمل منصة جسور؟</h2>
+                <h2 class="section-title lang-en">How Jusur Works?</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3 class="lang-ar">اختر مشكلة</h3>
+                        <h3 class="lang-en">Choose a Problem</h3>
+                        <p class="lang-ar">تصفح بنك المشكلات واختر التحدي الذي يناسبك</p>
+                        <p class="lang-en">Browse the Problems Bank and pick your challenge</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3 class="lang-ar">سجل فكرتك</h3>
+                        <h3 class="lang-en">Submit Your Idea</h3>
+                        <p class="lang-ar">قدم فكرتك واحصل على تقييم فوري من المساعد الذكي</p>
+                        <p class="lang-en">Submit your idea and get instant AI feedback</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3 class="lang-ar">احصل على مرشد</h3>
+                        <h3 class="lang-en">Get a Mentor</h3>
+                        <p class="lang-ar">تطابق مع رائد أعمال أو متخصص في مجالك</p>
+                        <p class="lang-en">Match with an entrepreneur or expert in your field</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3 class="lang-ar">انطلق وتمول</h3>
+                        <h3 class="lang-en">Launch & Fund</h3>
+                        <p class="lang-ar">اعرض مشروعك في يوم العرض واحصل على التمويل</p>
+                        <p class="lang-en">Present at Demo Day and secure funding</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section" style="background: var(--gray-bg);">
+            <div class="container">
+                <h2 class="section-title lang-ar">ماذا يقولون عن جسور؟</h2>
+                <h2 class="section-title lang-en">What They Say About Jusur?</h2>
+                <div class="grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text lang-ar">"جسور غيرت حياتي! حولت فكرتي البسيطة إلى مشروع حقيقي وحصلت على أول تمويل لي."</p>
+                        <p class="testimonial-text lang-en">"Jusur changed my life! It turned my simple idea into a real project and I got my first funding."</p>
+                        <p class="testimonial-name">أحمد الطلحي - طالب ثانوي</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text lang-ar">"سعيد بأن أكون مرشداً في جسور. هؤلاء الطلاب هم مستقبل ريادة الأعمال في السعودية."</p>
+                        <p class="testimonial-text lang-en">"Proud to be a mentor at Jusur. These students are the future of entrepreneurship in Saudi Arabia."</p>
+                        <p class="testimonial-name">خالد السبيعي - رائد أعمال</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text lang-ar">"منصة جسور مشروع وطني بامتياز يساهم في تحقيق رؤية 2030."</p>
+                        <p class="testimonial-text lang-en">"Jusur is a national project that contributes to achieving Vision 2030."</p>
+                        <p class="testimonial-name">د. سارة القحطاني - مستشارة تعليمية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta">
+            <div class="container">
+                <h2 class="lang-ar">انضم إلى آلاف الطلاب الذين بدأوا رحلتهم الريادية</h2>
+                <h2 class="lang-en">Join Thousands of Students Who Started Their Entrepreneurial Journey</h2>
+                <button class="btn-primary" onclick="openModal()" style="background: white; color: var(--primary-blue); margin-top: 20px;">
+                    <span class="lang-ar">ابدأ الآن مجاناً</span>
+                    <span class="lang-en">Start Now for Free</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">جسور | Jusur</div>
+                    <p class="lang-ar">أول حاضنة أعمال مدرسية ذكية في السعودية</p>
+                    <p class="lang-en">The first smart school business incubator in Saudi Arabia</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4 class="lang-ar">روابط سريعة</h4>
+                    <h4 class="lang-en">Quick Links</h4>
+                    <a href="#home" class="lang-ar">الرئيسية</a><a href="#home" class="lang-en">Home</a>
+                    <a href="#problems" class="lang-ar">بنك المشكلات</a><a href="#problems" class="lang-en">Problems Bank</a>
+                    <a href="#" class="lang-ar">عن المنصة</a><a href="#" class="lang-en">About</a>
+                    <a href="#" class="lang-ar">اتصل بنا</a><a href="#" class="lang-en">Contact</a>
+                </div>
+                <div class="footer-links">
+                    <h4 class="lang-ar">تواصل معنا</h4>
+                    <h4 class="lang-en">Contact Us</h4>
+                    <a href="#">info@jusur.sa</a>
+                    <a href="#">+966 55 123 4567</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <span class="lang-ar">© 2026 منصة جسور. جميع الحقوق محفوظة</span>
+                <span class="lang-en">© 2026 Jusur Platform. All Rights Reserved</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="joinModal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle" style="font-size: 60px; color: var(--primary-green); margin-bottom: 20px;"></i>
+            <h2 class="lang-ar">شكراً لاهتمامك!</h2>
+            <h2 class="lang-en">Thank You!</h2>
+            <p class="lang-ar">سيتم التواصل معك قريباً للانضمام إلى منصة جسور</p>
+            <p class="lang-en">We will contact you soon to join Jusur Platform</p>
+            <button class="btn-primary" onclick="closeModal()" style="margin-top: 20px;">
+                <span class="lang-ar">إغلاق</span>
+                <span class="lang-en">Close</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Language Toggle
+        let isEnglish = false;
+
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            if (isEnglish) {
+                document.body.classList.add('english');
+            } else {
+                document.body.classList.remove('english');
+            }
+        }
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('joinModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('joinModal').style.display = 'none';
+        }
+
+        // Problems Data
+        const problems = [
+            { id: 1, titleAr: "هدر الطعام في المقصف المدرسي", titleEn: "Food Waste in School Cafeteria", descAr: "كميات كبيرة من الطعام تُهدر يومياً في المقصف المدرسي", descEn: "Large amounts of food wasted daily in the school cafeteria", category: "env", badge: "بيئي", badgeEn: "Environmental", adopters: 45 },
+            { id: 2, titleAr: "ضعف الوعي المالي لدى الطلاب", titleEn: "Poor Financial Literacy Among Students", descAr: "الطلاب لا يعرفون كيفية إدارة أموالهم بشكل صحيح", descEn: "Students don't know how to manage their money properly", category: "edu", badge: "تعليمي", badgeEn: "Educational", adopters: 32 },
+            { id: 3, titleAr: "قلة الأنشطة الترفيهية في المدرسة", titleEn: "Lack of Recreational Activities", descAr: "عدم وجود أنشطة جاذبة للطلاب خلال الفسحة", descEn: "No engaging activities for students during break time", category: "health", badge: "اجتماعي", badgeEn: "Social", adopters: 28 },
+            { id: 4, titleAr: "صعوبة متابعة الواجبات المدرسية", titleEn: "Difficulty Tracking Homework", descAr: "الطلاب ينسون الواجبات أو لا يعرفون مواعيد التسليم", descEn: "Students forget homework or don't know deadlines", category: "tech", badge: "تقني", badgeEn: "Tech", adopters: 67 },
+            { id: 5, titleAr: "استهلاك المياه بشكل مفرط", titleEn: "Excessive Water Consumption", descAr: "هدر كبير في استهلاك المياه داخل المدرسة", descEn: "Large water waste inside the school", category: "env", badge: "بيئي", badgeEn: "Environmental", adopters: 23 },
+            { id: 6, titleAr: "التنمر بين الطلاب", titleEn: "Bullying Among Students", descAr: "ظاهرة التنمر تؤثر على الصحة النفسية للطلاب", descEn: "Bullying affects students' mental health", category: "health", badge: "صحي", badgeEn: "Health", adopters: 89 }
+        ];
+
+        function filterProblems(category) {
+            const filtered = category === 'all' ? problems : problems.filter(p => p.category === category);
+            renderProblems(filtered);
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function renderProblems(problemsArray) {
+            const grid = document.getElementById('problemsGrid');
+            grid.innerHTML = problemsArray.map(problem => `
+                <div class="problem-card">
+                    <span class="problem-badge">${isEnglish ? problem.badgeEn : problem.badge}</span>
+                    <h3 class="problem-title">${isEnglish ? problem.titleEn : problem.titleAr}</h3>
+                    <p class="problem-desc">${isEnglish ? problem.descEn : problem.descAr}</p>
+                    <div class="problem-stats">
+                        <span><i class="fas fa-users"></i> ${problem.adopters} ${isEnglish ? 'adopters' : 'مهتم'}</span>
+                        <button class="adopt-btn" onclick="openModal()">${isEnglish ? 'Adopt Problem' : 'تبنى المشكلة'}</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initial render
+        renderProblems(problems);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) target.scrollIntoView({behavior: 'smooth'});
+            });
+        });
+
+        // Close modal on click outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('joinModal');
+            if (event.target === modal) closeModal();
+        }
+    </script>
+</body>
+</html>
